@@ -49,7 +49,7 @@ Pastikan sudah terinstall:
 ### 1. Clone Repository
 
 ```bash
-git clone <url-repository-ini>
+git clone https://github.com/nandaarianto15/Photobooth.git
 cd photobooth
 ```
 
@@ -57,9 +57,25 @@ cd photobooth
 
 ### 2. Install PHP Dependencies
 
+Install semua dependensi PHP termasuk Laravel Reverb, Sanctum, dan **Midtrans PHP SDK**:
+
 ```bash
 composer install
 ```
+
+> Package yang diinstall antara lain: `laravel/reverb`, `laravel/sanctum`, `midtrans/midtrans-php`, dll.
+
+---
+
+### 2.5. Generate Reverb WebSocket Credentials
+
+Laravel Reverb membutuhkan credentials unik (App ID, Key, Secret). Jalankan:
+
+```bash
+php artisan reverb:install
+```
+
+> Perintah ini akan **otomatis mengisi** `REVERB_APP_ID`, `REVERB_APP_KEY`, dan `REVERB_APP_SECRET` di file `.env` kamu. Setelah ini, nilai-nilai tersebut sudah siap digunakan.
 
 ---
 
@@ -157,10 +173,10 @@ Karena pengguna membayar via ponsel dan scan QR code, kamu perlu mengekspos serv
 ngrok http 8000
 ```
 
-Setelah mendapat URL publik (contoh: `https://abc123.ngrok-free.app`), update `.env`:
+Setelah mendapat URL publik (contoh: `https://abc.ngrok-free.app`), update `.env`:
 
 ```env
-APP_URL=https://abc123.ngrok-free.app
+APP_URL=https://abc.ngrok-free.app
 ```
 
 Lalu restart `php artisan serve`.
@@ -178,7 +194,7 @@ pip3 install -r requirements.txt
 
 Buat file `.env` di Pi berisi:
 ```env
-REVERB_HOST="abc123.ngrok-free.app"   # domain ngrok (tanpa https://)
+REVERB_HOST="abc.ngrok-free.app"   # domain ngrok (tanpa https://)
 REVERB_PORT="443"                      # 443 jika HTTPS
 REVERB_SCHEME="https"
 PRINTER_TYPE="file"
