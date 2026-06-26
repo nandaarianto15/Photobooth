@@ -319,4 +319,5 @@ photobooth/
 
 ## 📝 Lisensi
 
-MIT License — Bebas digunakan dan dimodifikasi.
+MIT License
+Bebas digunakan dan dimodifikasi.
