@@ -80,6 +80,11 @@ class PaymentController extends Controller
 
     public function notification(Request $request)
     {
+        // Handle Midtrans URL validation ping (GET request)
+        if ($request->isMethod('get')) {
+            return response()->json(['success' => true, 'message' => 'Notification endpoint ready']);
+        }
+
         $payload = $request->all();
         Log::info('Midtrans Notification received', $payload);
 

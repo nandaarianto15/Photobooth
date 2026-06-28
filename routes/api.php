@@ -12,7 +12,7 @@ Route::delete('/photos/{id}', [PhotoController::class, 'destroy']);
 
 // Midtrans Payment Routes
 Route::post('/payment/create', [PaymentController::class, 'create']);
-Route::post('/payment/notification', [PaymentController::class, 'notification']);
+Route::match(['get', 'post'], '/payment/notification', [PaymentController::class, 'notification']);
 Route::get('/payment/status/{order_id}', [PaymentController::class, 'status']);
 
 // Automatic Receipt Download Route (triggered when scanning QR code)
