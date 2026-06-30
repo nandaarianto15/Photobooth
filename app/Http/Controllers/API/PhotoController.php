@@ -93,7 +93,7 @@ class PhotoController extends Controller
     {
         // Dimensions
         $w = 384;
-        $h = 920;
+        $h = 1200;
 
         // Ensure font folder exists and font file is downloaded
         $fontFolder = storage_path('app/fonts');
@@ -204,13 +204,15 @@ class PhotoController extends Controller
 
         // Draw QR Code pointing to Download route
         $downloadUrl = route('receipt.download', ['order_id' => $transaction->order_id]);
-        $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=100x100&margin=0&data=' . urlencode($downloadUrl);
+        $qrSize = 288;
+        $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=' . $qrSize . 'x' . $qrSize . '&margin=0&data=' . urlencode($downloadUrl);
         try {
             $qrResponse = Http::withoutVerifying()->get($qrUrl);
             if ($qrResponse->successful()) {
                 $qrImg = imagecreatefromstring($qrResponse->body());
                 if ($qrImg) {
-                    imagecopy($im, $qrImg, 142, 800, 0, 0, 100, 100);
+                    $qrX = (int)(($w - $qrSize) / 2);
+                    imagecopy($im, $qrImg, $qrX, 800, 0, 0, $qrSize, $qrSize);
                     imagedestroy($qrImg);
                 }
             }
@@ -219,7 +221,7 @@ class PhotoController extends Controller
         }
 
         // Draw Trx text below QR
-        $drawCenteredText(8, 912, $transaction->order_id);
+        $drawCenteredText(8, 800 + $qrSize + 22, $transaction->order_id);
 
         // Save receipt image to disk
         $receiptFilename = 'receipt_' . $transaction->order_id . '.png';

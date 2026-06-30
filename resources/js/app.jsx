@@ -285,7 +285,7 @@ async function generateReceiptDataURL(photoURL, filterId) {
   const photoImg = await loadImage(photoURL);
   const trxId = 'TRX' + Math.floor(Math.random() * 900000 + 100000);
   const downloadURL = `${window.location.origin}${window.location.pathname}#dl=${trxId}`;
-  const qrDataURL = await generateQRDataURL(downloadURL, 100);
+  const qrDataURL = await generateQRDataURL(downloadURL, 288);
   const qrImg = await loadImage(qrDataURL);
 
   const S = RECEIPT_SCALE;
@@ -314,9 +314,9 @@ async function generateReceiptDataURL(photoURL, filterId) {
   const l3 = l2 + 13;
   const scanY = l3 + 16;
   const qrY = scanY + 10;
-  const qrSz = 250;
-  const perfY = qrY + qrSz + 24;
-  const totalH = perfY + 16;
+  const qrSz = 288;
+  const perfY = qrY + qrSz + 36;
+  const totalH = perfY + 40;
 
   const cv = document.createElement('canvas');
   cv.width = W * S; cv.height = totalH * S;
