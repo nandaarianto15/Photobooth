@@ -398,7 +398,7 @@ async function generateReceiptDataURL(photoURL, filterId) {
   cx.fillStyle = '#444';
   cx.fillText('Scan QR untuk versi digital', W / 2, scanY);
 
-  const qrX = (W - qrSz) / 2;
+  const qrX = (W - qrSz);
   cx.fillStyle = '#fff';
   cx.fillRect(qrX - 4, qrY, qrSz + 8, qrSz + 8);
   cx.drawImage(qrImg, qrX, qrY, qrSz, qrSz);
